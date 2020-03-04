@@ -1,8 +1,55 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-
 static unsigned int delays[] = {
+	50,
+	55,
+	61,
+	67,
+	73,
+	81,
+	89,
+	97,
+	107,
+	118,
+	130,
+	143,
+	157,
+	173,
+	190,
+	209,
+	230,
+	253,
+	278,
+	306,
+	336,
+	370,
+	407,
+	448,
+	492,
+	542,
+	596,
+	655,
+	721,
+	793,
+	872,
+	960,
+	1056,
+	1161,
+	1277,
+	1405,
+	1546,
+	1700,
+	1870,
+	2057,
+	2263,
+	2489,
+	2738,
+	3012,
+};
+
+
+static unsigned int delays2[] = {
 	100,
 	110,
 	121,
@@ -43,14 +90,16 @@ static unsigned int delays[] = {
 	3400,
 	3740,
 	4114,
+	4535,
+	4978,
 };
-static int last_delay_index = 39;
+static int last_delay_index = 43;
 
 
 #define PIN_HIGH() PORTB |= 1 << 4;
 #define PIN_LOW() PORTB &= ~(1 << 4);
 
-#define MAGIC(x) PIN_HIGH(); _delay_us(delays[x]); PIN_LOW(); _delay_us(20000 - delays[x]); break;
+#define MAGIC(x) PIN_HIGH(); _delay_us(delays[x]); PIN_LOW(); _delay_us(10000 - delays[x]); break;
 
 
 /*** MAIN ***/
@@ -69,7 +118,7 @@ int __attribute__((noreturn)) main(void)
 
 	while (1) {
 
-		for (repeat = 0; repeat < 2; repeat++) {
+		for (repeat = 0; repeat < 6; repeat++) {
 
 			switch (delay_index) {
 				case 0: MAGIC(delay_index);
@@ -109,6 +158,8 @@ int __attribute__((noreturn)) main(void)
 				case 37: MAGIC(delay_index);
 				case 38: MAGIC(delay_index);
 				case 39: MAGIC(delay_index);
+				case 40: MAGIC(delay_index);
+				case 41: MAGIC(delay_index);
 			}
 		}
 
